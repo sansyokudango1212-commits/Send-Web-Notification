@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>通知送信サイト</title>
+<title>通知送信</title>
 <style>
   body {
     font-family: sans-serif;
@@ -64,7 +64,7 @@
 <body>
 
 <div class="container">
-  <h1>通知送信サイト</h1>
+  <h1>通知送信</h1>
 
   <label>タイトル:</label>
   <input type="text" id="title" placeholder="タイトル">
@@ -79,9 +79,15 @@
 </div>
 
 <script>
+// 🔹 モバイル判定＆警告
+if (/Mobi|Android|iPhone|iPad|iPod|Windows Phone|Harmony|Silk|Kindle/i.test(navigator.userAgent)) {
+  alert("このサイトはモバイル系端末では動作しません\nPCでアクセスしてください");
+}
+
+// 🔹 通知送信関数
 function sendNotification() {
   if (!("Notification" in window)) {
-    alert("このアプリケーションはWEBからの通知の送信に対応していません。");
+    alert("このアプリケーションは通知の送信に対応していません");
     return;
   }
 
@@ -110,3 +116,4 @@ function sendNotification() {
 
 </body>
 </html>
+
