@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Web通知送信</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background-color: #2d2d2d; /* 背景色 */
+    color: #fff; /* 文字色 */
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 400px; /* 入力欄とボタンの幅を固定 */
+  }
+
+  h1 {
+    text-align: center; /* 中央寄せ */
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 0px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #444;
+    color: #fff;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    resize: vertical; /* 高さだけ調整可能 */
+  }
+
+  button {
+    height: 40px;            /* 縦小さめ */
+    width: 150px;            /* 横幅 */
+    background-color: #005cb9;
+    color: white;
+    border: none;
+    border-radius: 20px;     /* 角丸 */
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto 0;     /* 中央寄せ */
+    text-align: center;
+    line-height: 40px;       /* 文字縦中央 */
+  }
+
+  button:hover {
+    background-color: #1C86EE;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Web通知送信</h1>
+
+  <label>タイトル:</label>
+  <input type="text" id="title" placeholder="通知タイトル">
+
+  <label>本文:</label>
+  <textarea id="message" rows="4" placeholder="通知本文"></textarea>
+
+  <label>アイコンURL:</label>
+  <input type="text" id="icon" placeholder="例: https://example.com/icon.png">
+
+  <button onclick="sendNotification()">送信</button>
+</div>
+
+<script>
+function sendNotification() {
+  if (!("Notification" in window)) {
+    alert("このブラウザは通知に対応していません。");
+    return;
+  }
+
+  if (Notification.permission === "granted") {
+    showNotification();
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        showNotification();
+      }
+    });
+  }
+
+  function showNotification() {
+    const title = document.getElementById("title").value || "タイトルなし";
+    const message = document.getElementById("message").value || "本文なし";
+    const icon = document.getElementById("icon").value || "";
+
+    new Notification(title, {
+      body: message,
+      icon: icon
+    });
+  }
+}
+</script>
+
+</body>
+</html>
