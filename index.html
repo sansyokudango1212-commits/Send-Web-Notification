@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Web通知送信</title>
+<title>通知送信サイト</title>
 <style>
   body {
     font-family: sans-serif;
@@ -64,13 +64,13 @@
 <body>
 
 <div class="container">
-  <h1>Web通知送信</h1>
+  <h1>通知送信サイト</h1>
 
   <label>タイトル:</label>
-  <input type="text" id="title" placeholder="通知タイトル">
+  <input type="text" id="title" placeholder="タイトル">
 
   <label>本文:</label>
-  <textarea id="message" rows="4" placeholder="通知本文"></textarea>
+  <textarea id="message" rows="4" placeholder="本文"></textarea>
 
   <label>アイコンURL:</label>
   <input type="text" id="icon" placeholder="例: https://example.com/icon.png">
@@ -81,7 +81,7 @@
 <script>
 function sendNotification() {
   if (!("Notification" in window)) {
-    alert("このブラウザは通知に対応していません。");
+    alert("このアプリケーションはWEBからの通知の送信に対応していません。");
     return;
   }
 
@@ -96,8 +96,8 @@ function sendNotification() {
   }
 
   function showNotification() {
-    const title = document.getElementById("title").value || "タイトルなし";
-    const message = document.getElementById("message").value || "本文なし";
+    const title = document.getElementById("title").value || " ";
+    const message = document.getElementById("message").value || " ";
     const icon = document.getElementById("icon").value || "";
 
     new Notification(title, {
